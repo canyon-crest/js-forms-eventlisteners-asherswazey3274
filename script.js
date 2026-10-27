@@ -29,6 +29,10 @@
 //
 //         Example: "hello" → "HELLO!"
 
+document.getElementById("btnShout").addEventListener('click', function(){
+    outShout.innerHTML = shoutInput.value.toUpperCase();
+})
+
 
 // ============================================
 //  MAIN: Pizza Builder
@@ -44,16 +48,74 @@
 //         Add a click event listener.
 //         Inside the listener:
 
+btnCalc.addEventListener('click', function(){
+    let sizePrice = 0
+    const size = document.getElementsByName("rg")
+    for (let i = 0; i < size.length; i++){
+        if (sizes[i].checked){
+            sizePrice = parseFloat(sizes[i].value)
+        }
+    }
+
+    let toppingPrice = 0;
+    const toppings = document.getElementsByName("cb")
+    for (let i = 0; i < toppings.length; i++){
+        if (toppings[i].checked){
+            toppingPrice += .50;
+        }
+
+    let serviceFee = 0
+    const serviceValue = document.getElementById("serviceSelect").value
+    if (serviceValue === "dinein"){
+        serviceFee = 0.00
+    }
+    else if (serviceValue === "takeout"){
+        serviceFee = 1.50
+    }
+    else if (serviceValue === "delivery"){
+        serviceFee = 3.00
+    }
+    
+    const totalOrderPrice = sizePrice + toppingPrice + serviceFee
+
+    let customerName = document.getElementById("myInput").value.trim()
+    if (customerName === ""){
+        customerName = "Customer"
+    }
+
+     document.getElementById("myPara").innerHTML = customerName + ", your total is $" + totalOrderPrice.toFixed(2);
+
+}})
+
+const clearBtn = document.getElementById("clearBtn");
+
+clearBtn.addEventListener('click', function() {
+    document.getElementById("myInput").value = "";
+    document.getElementById("r3").checked = true;
+    const toppings = document.getElementsByName("cb");
+    for (let i = 0; i < toppings.length; i++) {
+        toppings[i].checked = false;
+    }
+    
+    document.getElementById("serviceSelect").value = "dinein";
+    document.getElementById("myPara").innerHTML = "";
+});
+
 //   a) Get the selected size price:
 //      Use document.getElementsByName("rg") to get all
 //      size radio buttons. Loop through them to find the
 //      one that is .checked, and read its .value.
-//      Convert to a number with parseFloat().
+//      Convert to a number with parseFloat().\
+
+
 
 //   b) Count checked toppings:
 //      Use document.getElementsByName("cb") to get all
 //      topping checkboxes. Loop through and count how
 //      many are .checked. Multiply count by 0.50.
+
+
+
 
 //   c) Get the service fee:
 //      Use document.getElementById("serviceSelect").value
