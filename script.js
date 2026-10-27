@@ -30,7 +30,7 @@
 //         Example: "hello" → "HELLO!"
 
 document.getElementById("btnShout").addEventListener('click', function(){
-    outShout.innerHTML = shoutInput.value.toUpperCase();
+    outShout.innerHTML = shoutInput.value.toUpperCase() + "!";
 })
 
 
