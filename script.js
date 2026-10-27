@@ -48,47 +48,51 @@ document.getElementById("btnShout").addEventListener('click', function(){
 //         Add a click event listener.
 //         Inside the listener:
 
+// Grab the button explicitly first
+const btnCalc = document.getElementById("btnCalc");
+
 btnCalc.addEventListener('click', function(){
-    let sizePrice = 0
-    const size = document.getElementsByName("rg")
-    for (let i = 0; i < size.length; i++){
+    let sizePrice = 0;
+    // 1. Changed variable name to 'sizes' to match your loop
+    const sizes = document.getElementsByName("rg"); 
+    for (let i = 0; i < sizes.length; i++){
         if (sizes[i].checked){
-            sizePrice = parseFloat(sizes[i].value)
+            sizePrice = parseFloat(sizes[i].value);
         }
     }
 
     let toppingPrice = 0;
-    const toppings = document.getElementsByName("cb")
+    const toppings = document.getElementsByName("cb");
     for (let i = 0; i < toppings.length; i++){
         if (toppings[i].checked){
             toppingPrice += .50;
         }
+    } // 2. Added missing closing brace here
 
-    let serviceFee = 0
-    const serviceValue = document.getElementById("serviceSelect").value
+    let serviceFee = 0;
+    const serviceValue = document.getElementById("serviceSelect").value;
     if (serviceValue === "dinein"){
-        serviceFee = 0.00
+        serviceFee = 0.00;
     }
     else if (serviceValue === "takeout"){
-        serviceFee = 1.50
+        serviceFee = 1.50;
     }
     else if (serviceValue === "delivery"){
-        serviceFee = 3.00
+        serviceFee = 3.00;
     }
     
-    const totalOrderPrice = sizePrice + toppingPrice + serviceFee
+    const totalOrderPrice = sizePrice + toppingPrice + serviceFee;
 
-    let customerName = document.getElementById("myInput").value.trim()
+    let customerName = document.getElementById("myInput").value.trim();
     if (customerName === ""){
-        customerName = "Customer"
+        customerName = "Customer";
     }
 
-     document.getElementById("myPara").innerHTML = customerName + ", your total is $" + totalOrderPrice.toFixed(2);
+    document.getElementById("myPara").innerHTML = customerName + ", your total is $" + totalOrderPrice.toFixed(2);
+});
 
-}})
-
+// The clear button code you wrote below is perfectly fine!
 const clearBtn = document.getElementById("clearBtn");
-
 clearBtn.addEventListener('click', function() {
     document.getElementById("myInput").value = "";
     document.getElementById("r3").checked = true;
@@ -96,7 +100,6 @@ clearBtn.addEventListener('click', function() {
     for (let i = 0; i < toppings.length; i++) {
         toppings[i].checked = false;
     }
-    
     document.getElementById("serviceSelect").value = "dinein";
     document.getElementById("myPara").innerHTML = "";
 });
